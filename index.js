@@ -5,7 +5,7 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // A list of prompts to run through inquirer.prompt():
 const questions = [
-  //* prompt title of project;
+  //* prompt Title of project;
   {
     type: 'input',
     name: 'title',
@@ -88,18 +88,16 @@ const questions = [
   },
 ];
 
-// Function to write README file
-const writeToFile = (data) => {
-  fs.writeFile('./generated/README.md', generateMarkdown(data), (err) => 
-    err ? console.log(err) : console.log(`Success! Check the 'generated' directory`)
-  );
-}
-
-// Function to initialize app
+// Main functionality:
 function init() {
+  // prompt answers to generateMarkdown()
   inquirer.prompt(questions).then((answers) => {
     console.log(JSON.stringify(answers)) // for debugging purposes
-    writeToFile(answers);
+    
+    // write the README from Markdown
+    fs.writeFile('./generated/README.md', generateMarkdown(answers), (err) => 
+      err ? console.log(err) : console.log(`Success! Check the 'generated' directory`)
+    );
   })
 }
 
