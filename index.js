@@ -66,24 +66,28 @@ const questions = [
   },
   //* prompt for Questions section;
   // take email and/or github username
-  {},
-    // conditional:
-    {
-      type: 'input',
-      name: 'email',
-      message: 'Enter Email:',
-      when(answers) {
-        return answers//.'name'[array traversal] === true
-      },
-    },
-    {
-      type: 'input',
-      name: 'email',
-      message: 'Enter GitHub Username:',
-      when(answers) {
-        return answers//.'name'[array traversal] === true
-      },
-    },
+  {
+    type: 'confirm',
+    name: 'confirm.email',
+    message: 'Include Email address?',
+  },
+  {
+    type: 'confirm',
+    name: 'confirm.github',
+    message: 'Include GitHub account?',
+  },
+  {
+    type: 'input',
+    name: 'questions.email',
+    message: 'Enter Email address:',
+    when: (answers) => answers.confirm.email,
+  },
+  {
+    type: 'input',
+    name: 'questions.github',
+    message: 'Enter GitHub Username:',
+    when: (answers) => answers.confirm.github,
+  },
 ];
 
 // TODO: Create a function to write README file
