@@ -1,3 +1,21 @@
+// Expected answers = {
+//   'title': String,
+//   'descr': String,
+//   'inst': String,
+//   'usage' : String,
+//   'license' : String,
+//   'contr' : String,
+//   'tests' : String,
+//   'confirm' : {
+//     'email': Boolean,
+//     'github': Boolean,
+//   },
+//   'questions' : {
+//     'email': String,
+//     'github': String,
+//   },
+// } = data parameter in generateMarkdown()
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {}
