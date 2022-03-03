@@ -3,89 +3,71 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
-// A list of prompts to run through inquirer.prompt():
-const questions = [
-  //* prompt Title of project;
-  {
-    type: 'input',
-    name: 'title',
-    message: 'Enter a Title'
-  },
+// create classes to generate objects
+class Prompts {
+  constructor(type, name, message) {
+    this.type = type;
+    this.name = name;
+    this.message = message;
+  }
+}
 
+class List extends Prompts {
+  constructor(type, name, message, choices) {
+    super(type, name, message);
+    this.choices = choices;
+  }
+}
+
+class Conditional extends Prompts {
+  constructor(type, name, message, when) {
+    super(type, name, message);
+    this.when = when;
+  }
+}
+// A list of prompts to run through inquirer.prompt():
+const questions = [ // create instances of Prompts and List4
+  //* prompt Title of project;
+  new Prompts('input', 'title', 'Enter a Title:', null),
+  
   //* prompt for Description section;
-  {
-    type: 'input',
-    name: 'descr',
-    message: 'Enter a Description:'
-  },
+  new Prompts('input', 'descr', 'Enter a Description:'),
 
   //* prompt for Installation section;
-  {
-    type: 'input',
-    name: 'inst',
-    message: 'Enter any Installation instructions:'
-  },
+  new Prompts('input', 'inst', 'Enter any Installation instructions:'),
 
   //* prompt for Usage section;
-  {
-    type: 'input',
-    name: 'usage',
-    message: 'Enter any Usage information:'
-  },
+  new Prompts('input','usage', 'Enter any Usage information:'),
 
   //* prompt for License section;
-  {
-    type: 'list',
-    name: 'license',
-    choices: [
-      'Apache License 2.0',
-      'Boost Software License',
-      'Creative Commons Zero v1.0 Universal',
-      'GNU General Public License v3.0',
-      'ISC License',
-      'MIT License',
-      'Mozilla Public License 2.0',
-      'The Unlicense',
-    ],
-  },
+  new List('list', 'license', 'Chose a License:', 
+    [ // array of licenses accepted as an argument
+    'Apache License 2.0',
+    'Boost Software License',
+    'Creative Commons Zero v1.0 Universal',
+    'GNU General Public License v3.0',
+    'ISC License',
+    'MIT License',
+    'Mozilla Public License 2.0',
+    'The Unlicense',
+    ]
+  ),
 
   //* prompt for Contributing section;
-  {
-    type: 'input',
-    name: 'contr',
-    message: 'Enter any Contribution guidelines:'
-  },
+  new Prompts('input', 'contr', 'Enter any Contribution guidelines:'),
 
   //* prompt for Tests section;
-  {
-    type: 'input',
-    name: 'tests',
-    message: 'Enter any Test instructions:'
-  },
+  new Prompts('input', 'tests', 'Enter any Test information'),
 
   //* prompts for Questions section;
-  {
-    type: 'confirm',
-    name: 'confirm.email',
-    message: 'Include Email address?',
-  },
-  {
-    type: 'input',
-    name: 'questions.email',
-    message: 'Enter Email address:',
-    when: (answers) => answers.confirm.email,
-  },
-  {
-    type: 'confirm',
-    name: 'confirm.github',
-    message: 'Include GitHub account?',
-  },
-  {
-    type: 'input',
-    name: 'questions.github',
-    message: 'Enter GitHub Username:',
-    when: (answers) => answers.confirm.github,
-  },
+  
+    // prompt for Email:
+  new Prompts('confirm', 'confirm.email', "Include Email?"),
+  new Conditional('input', 'questions.email', 'Enter Email address:', (answers) => answers.confirm.email),
+    
+    //prompt for GitHub username:
+  new Prompts('confirm', 'confirm.github', 'Include GitHub account?'),
+  new Conditional('input', 'questions.github', 'Enter Github Username:', (answers) => answers.confirm.github)
 ];
 
 // Main functionality:
