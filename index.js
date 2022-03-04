@@ -41,17 +41,19 @@ const questions = [
 
   //* prompt for License section;
   new List('list', 'license', 'Chose a License:', 
-    [ // array of licenses accepted as an argument
+    [ // array of licenses accepted as choices
     'Apache License 2.0',
     'Boost Software License',
     'Creative Commons Zero v1.0 Universal',
     'GNU General Public License v3.0',
-    'ISC License',
     'MIT License',
     'Mozilla Public License 2.0',
     'The Unlicense',
+    'None',
     ]
   ),
+  new Prompts('input', 'name', 'Enter the Name to appear on the License:'),
+  new Prompts('input', 'year', 'Enter the Year to appear on the License:'),
 
   //* prompt for Contributing section;
   new Prompts('input', 'contr', 'Enter any Contribution guidelines:'),
