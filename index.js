@@ -25,8 +25,8 @@ class Conditional extends Prompts {
     this.when = when;
   }
 }
-// A list of prompts to run through inquirer.prompt():
-const questions = [ // create instances of Prompts and List4
+// Generate a  list of prompts to run through inquirer.prompt():
+const questions = [
   //* prompt Title of project;
   new Prompts('input', 'title', 'Enter a Title:', null),
   
@@ -74,10 +74,10 @@ const questions = [ // create instances of Prompts and List4
 function init() {
   // prompt answers to generateMarkdown()
   inquirer.prompt(questions).then((answers) => {
-    console.log(JSON.stringify(answers)) // for debugging purposes
+    console.log(JSON.stringify(answers)); // for debugging purposes
     
     // write the README from Markdown
-    fs.writeFile('./generated/README.md', generateMarkdown(answers), (err) => 
+    fs.writeFile(`./generated/${answers.title}-README.md`, generateMarkdown(answers), (err) => 
       err ? console.log(err) : console.log(`Success! Check the 'generated' directory`)
     );
   })
