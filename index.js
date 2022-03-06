@@ -76,7 +76,7 @@ const questions = [
 function init() {
   // prompt answers to generateMarkdown()
   inquirer.prompt(questions).then((answers) => {
-    console.log(JSON.stringify(answers)); // for debugging purposes
+    // console.log(JSON.stringify(answers)); // for debugging purposes
     
     // write the README from Markdown
     fs.writeFile(`./generated/${answers.title}-README.md`, generateMarkdown(answers), (err) => 

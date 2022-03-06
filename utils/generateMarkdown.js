@@ -263,25 +263,6 @@ class License {
 
 // Generate markdown for README
 function generateMarkdown(data) {
-  // Expected data = {
-  //   title: String,
-  //   descr: String,
-  //   inst: String,
-  //   usage: String,
-  //   license: String,
-  //   name: String,
-  //   year: String,
-  //   contr: String,
-  //   tests: String,
-  //   confirm: {
-  //     email: Boolean,
-  //     github: Boolean,
-  //   },
-  //   questions: {
-  //     email: String,
-  //     github: String,
-  //   },
-  // } 
   const license = new License(data.license, data.name, data.year);
   
   return `
