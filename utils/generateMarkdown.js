@@ -269,6 +269,7 @@ function generateMarkdown(data) {
   # ${data.title}
   ## Description
   ${license.badge}
+  
   ${data.descr}
   ## Table of Contents:
   - [Installation](#installation)
